@@ -1,0 +1,495 @@
+{
+	"info": {
+		"_postman_id": "18cff7af-bb80-47d1-864a-3ac65e9a70a2",
+		"name": "lesson 17",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35123755",
+		"_collection_link": "https://qwallity-3653.postman.co/workspace/qwallit~f99df1c7-e18d-46bf-850e-389f699354bc/collection/35123755-18cff7af-bb80-47d1-864a-3ac65e9a70a2?action=share&source=collection_link&creator=35123755"
+	},
+	"item": [
+		{
+			"name": "register non admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"var res =pm.response.json();\r",
+							"{\r",
+							"    pm.collectionVariables.set(\"user_id\",res.user_id)\r",
+							"};\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"liam\",\r\n  \"email\": \"liam@mail.ru\",\r\n  \"username\": \"liam1\",\r\n  \"password\": \"00000000\",\r\n  \"role_id\": 2,\r\n  \"account\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/register/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"register",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "log in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"var res=pm.response.json();\r",
+							"{\r",
+							"    pm.collectionVariables.set(\"token\",res.token)\r",
+							"};"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "00000000",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "liam1",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/login/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"login",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user role",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"role_id\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/user_role/{{username}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"user_role",
+						"{{username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new fundamental course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res =pm.response.json();\r",
+							"{\r",
+							"    pm.collectionVariables.set(\"course_id\",res.id)\r",
+							"};\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"first1\",\r\n  \"body\": \"course1\",\r\n  \"coursetype\": \"2\",\r\n  \"author\": \"liamm\",\r\n  \"price\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/add_course/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"add_course",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "course price by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/course_price/api/{{course_id}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"course_price",
+						"api",
+						"{{course_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user role as non admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"role_id\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/user_role/{{username}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"user_role",
+						"{{username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "buy added course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/buy_course/api/{{course_id}}/{{username}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"buy_course",
+						"api",
+						"{{course_id}}",
+						"{{username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get non admin user's courses",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/usercourses/api/{{user_id}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"usercourses",
+						"api",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "user_id",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "username",
+			"value": ""
+		},
+		{
+			"key": "course_id",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
