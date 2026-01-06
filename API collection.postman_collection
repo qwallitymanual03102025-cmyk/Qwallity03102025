@@ -1,0 +1,493 @@
+{
+	"info": {
+		"_postman_id": "9b789aeb-c1c6-4d52-82cf-80bae2395d94",
+		"name": "Homework Mery 17",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50323815",
+		"_collection_link": "https://mery-harutyunyan11-9416760.postman.co/workspace/99657877-e942-4a95-87f7-ff6e0c616a97/collection/50323815-9b789aeb-c1c6-4d52-82cf-80bae2395d94?action=share&source=collection_link&creator=50323815"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res_register = pm.response.json()\r",
+							"{\r",
+							"    pm.collectionVariables.set(\"UserId\", res_register.user_id);\r",
+							"}\r",
+							"\r",
+							"pm.test(\"User is created\", function () {\r",
+							"    pm.expect(res_register.message).to.eql(\"User is created\"); \r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"first_name\": \"Mery8\",\r\n  \"email\": \"mery8d@mailinator.com\",\r\n  \"username\": \"Mery8\",\r\n  \"password\": \"11111111\",\r\n  \"role_id\": 2,\r\n  \"account\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/register/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"register",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var res = pm.response.json()\r",
+							"{\r",
+							"    pm.collectionVariables.set(\"token\", res.token );\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status (200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "Mery8",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "11111111",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/login/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"login",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user role_id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status (200);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"role_id\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/user_role/{{Username}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"user_role",
+						"{{Username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new Fund. course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var add_course_response = pm.response.json()\r",
+							"{   \r",
+							"    pm.collectionVariables.set(\"AddedCourseId\",add_course_response.id );\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function ()\r",
+							"{   \r",
+							"    pm.response.to.have.status(200);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"Mery8course\",\r\n  \"body\": \"course_body\",\r\n  \"coursetype\": \"1\",\r\n  \"author\": \"{{Username}}\",\r\n  \"price\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/add_course/api",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"add_course",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Course price by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function ()\r",
+							"{   \r",
+							"    pm.response.to.have.status(200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/course_price/api/{{AddedCourseId}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"course_price",
+						"api",
+						"{{AddedCourseId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update role as non-admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status (200);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"role_id\": \"2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/user_role/{{Username}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"user_role",
+						"{{Username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buy Course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status (200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/buy_course/api/{{AddedCourseId}}/{{Username}}",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"buy_course",
+						"api",
+						"{{AddedCourseId}}",
+						"{{Username}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non-admin user's course",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status (200);\r",
+							"})"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://qwallity-dev.onrender.com/usercourses/api/9597782",
+					"protocol": "https",
+					"host": [
+						"qwallity-dev",
+						"onrender",
+						"com"
+					],
+					"path": [
+						"usercourses",
+						"api",
+						"9597782"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "Email",
+			"value": ""
+		},
+		{
+			"key": "Password",
+			"value": ""
+		},
+		{
+			"key": "AddedCourseId",
+			"value": ""
+		},
+		{
+			"key": "UserId",
+			"value": ""
+		},
+		{
+			"key": "Username",
+			"value": ""
+		}
+	]
+}
